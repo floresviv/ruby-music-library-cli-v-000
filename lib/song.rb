@@ -2,20 +2,25 @@ require_relative './concerns/findable.rb'
 
 class Song
 	attr_accessor :name, :artist, :genre
-	include Concerns::Findable
+	# include Concerns::Findable
 	
 	@@all = []
 
 	def initialize(name, artist = " ",  genre = " ")
 		@name = name
 		@artist = artist
-		@genre = genre	
+		@genre = genre
+	end
+
+	def artist=(name)
+		artist = Artist.new(name)
+		artist.songs << self
+		artist
 	end
 
 	def self.all
 		@@all
 	end
-
 
 	def save
 		@@all << self
