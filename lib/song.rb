@@ -6,16 +6,14 @@ class Song
 	
 	@@all = []
 
-	def initialize(name, artist = nil,  genre = " ")
+	def initialize(name, artist = "", genre = " ")
 		@name = name
 		@artist = artist
 		@genre = genre
 	end
 
-	def artist=(name)
-		artist = Artist.new(name)
-		artist.songs << self
-		artist
+	def artist=(some_artist)
+		some_artist.songs << self
 	end
 
 	def self.all
