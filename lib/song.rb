@@ -6,14 +6,25 @@ class Song
 	
 	@@all = []
 
-	def initialize(name, artist = "", genre = " ")
+	def initialize(name, artist = "", genre = "")
 		@name = name
 		@artist = artist
 		@genre = genre
 	end
 
 	def artist=(some_artist)
+		@artist = some_artist
 		some_artist.songs << self
+		some_artist.add_song(self)
+	end
+
+	def genre=(some_genre)
+		@genre = some_genre
+		if some_genre.songs.include?(self)
+			self
+		else
+			some_genre.songs << self
+		end
 	end
 
 	def self.all

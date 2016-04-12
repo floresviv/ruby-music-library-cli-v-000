@@ -18,13 +18,14 @@ class Artist
 	end
 
 	def add_song(song)
-		if self.songs.include?(song)
+		if self.songs.find(song)
 			song
 		else
-			@songs << song
+			self.songs << song
 		end
-		
-		if song.artist == " "
+		if song.artist == self
+			self
+		else
 			song.artist = self
 		end
 	end
@@ -48,8 +49,10 @@ class Artist
 	end
 
 	def genres
-		@songs.collect do |song|
-			song.genre
+		genres = []
+		self.songs.collect do |song|
+			genres << song.genre
+			genres.uniq
 		end
 	end
 end
